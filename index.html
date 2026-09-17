@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>전기공학과 체크</title>
+<meta name="description" content="26 전전반 체육대회 전기공학과 개총·회식 참석 체크">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-180.png">
+<style>
+:root{
+  --bg:#f5f6f8; --card:#ffffff; --line:#e3e6ec; --fg:#14181f; --muted:#6b7280;
+  --accent:#2563eb; --accent-soft:#e8efff;
+  --ok:#16a34a; --ok-soft:#e6f6ec;
+  --blue:#2563eb; --blue-soft:#e6eeff; --white-t:#64748b; --white-soft:#eef1f6;
+  --shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1116; --card:#161b22; --line:#262d38; --fg:#e7ebf0; --muted:#98a2b3;
+    --accent:#4b8bff; --accent-soft:#17243d;
+    --ok:#3ddc84; --ok-soft:#10301f;
+    --blue:#4b8bff; --blue-soft:#17243d; --white-t:#cbd5e1; --white-soft:#212832;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1116; --card:#161b22; --line:#262d38; --fg:#e7ebf0; --muted:#98a2b3;
+  --accent:#4b8bff; --accent-soft:#17243d;
+  --ok:#3ddc84; --ok-soft:#10301f;
+  --blue:#4b8bff; --blue-soft:#17243d; --white-t:#cbd5e1; --white-soft:#212832;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",Pretendard,"Noto Sans KR","Malgun Gothic",sans-serif;
+  font-size:16px;line-height:1.4;
+  padding-bottom:calc(84px + env(safe-area-inset-bottom));
+  overscroll-behavior-y:contain;
+}
+header{
+  position:sticky;top:0;z-index:20;background:var(--card);
+  border-bottom:1px solid var(--line);
+  padding:calc(10px + env(safe-area-inset-top)) 16px 10px;
+}
+.title{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.title h1{font-size:17px;margin:0;font-weight:700;letter-spacing:-.02em}
+.title span{font-size:12px;color:var(--muted)}
+.stats{display:flex;gap:8px;margin-top:10px}
+.stat{flex:1;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:8px 10px;min-width:0}
+.stat b{display:block;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+.stat .num{font-size:20px;font-weight:800;letter-spacing:-.03em;margin-top:1px}
+.stat .num i{font-style:normal;font-size:13px;color:var(--muted);font-weight:600}
+.stat .sub{font-size:11px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar{height:4px;border-radius:99px;background:var(--line);margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--ok);border-radius:99px;transition:width .25s}
+.tools{display:flex;gap:8px;margin-top:10px}
+#q{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:15px;color:var(--fg);font-family:inherit}
+#q::placeholder{color:var(--muted)}
+.chips{display:flex;gap:6px;overflow-x:auto;margin-top:9px;padding-bottom:2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:99px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+main{padding:10px 12px 0}
+.row{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:9px 10px 9px 12px;margin-bottom:7px;box-shadow:var(--shadow)}
+.no{font-size:12px;color:var(--muted);width:20px;flex:0 0 auto;text-align:right;font-variant-numeric:tabular-nums}
+.who{flex:1;min-width:0}
+.nm{display:flex;align-items:center;gap:6px}
+.nm strong{font-size:17px;font-weight:700;letter-spacing:-.02em}
+.team{font-size:11px;font-weight:800;border-radius:6px;padding:2px 6px;line-height:1.3}
+.team.blue{background:var(--blue-soft);color:var(--blue)}
+.team.white{background:var(--white-soft);color:var(--white-t)}
+.ev{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btns{display:flex;gap:6px;flex:0 0 auto}
+.tg{width:62px;height:46px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--muted);font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;transition:transform .08s}
+.tg:active{transform:scale(.94)}
+.tg em{font-style:normal;font-size:15px;line-height:1}
+.tg[aria-pressed="true"]{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.empty{text-align:center;color:var(--muted);font-size:14px;padding:40px 0}
+footer{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1px solid var(--line);padding:8px 12px calc(8px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:11px;padding:11px 12px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.grow{flex:1}
+.me{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:9px 11px;font-size:14px;color:var(--fg);font-family:inherit}
+dialog{border:none;border-radius:18px;padding:0;max-width:440px;width:calc(100% - 28px);background:var(--card);color:var(--fg);box-shadow:var(--shadow)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+.sheet{padding:18px}
+.sheet h2{margin:0 0 4px;font-size:17px}
+.sheet p{margin:0 0 14px;font-size:13px;color:var(--muted);line-height:1.5}
+.sheet textarea{width:100%;height:82px;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:10px;font-size:12px;color:var(--fg);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;resize:vertical;word-break:break-all}
+.sheet .g{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.sheet hr{border:none;border-top:1px solid var(--line);margin:18px 0}
+#toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#111827;color:#fff;padding:10px 16px;border-radius:99px;font-size:13px;font-weight:600;z-index:60;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw;text-align:center}
+#toast.on{opacity:.96}
+</style>
+</head>
+<body>
+<header>
+  <div class="title"><h1>26 전전반 체육대회 · 전기공학과</h1><span id="hint"></span></div>
+  <div class="stats">
+    <div class="stat">
+      <b>개총</b>
+      <div class="num" id="gcNum">0</div>
+      <div class="sub" id="gcSub">청 0 · 백 0</div>
+      <div class="bar"><i id="gcBar"></i></div>
+    </div>
+    <div class="stat">
+      <b>회식</b>
+      <div class="num" id="hsNum">0</div>
+      <div class="sub" id="hsSub">청 0 · 백 0</div>
+      <div class="bar"><i id="hsBar"></i></div>
+    </div>
+  </div>
+  <div class="tools"><input id="q" type="search" placeholder="이름 검색" autocomplete="off"></div>
+  <div class="chips" id="chips">
+    <button class="chip" data-f="all" aria-pressed="true">전체</button>
+    <button class="chip" data-f="blue" aria-pressed="false">청팀</button>
+    <button class="chip" data-f="white" aria-pressed="false">백팀</button>
+    <button class="chip" data-f="gc0" aria-pressed="false">개총 미체크</button>
+    <button class="chip" data-f="hs0" aria-pressed="false">회식 미체크</button>
+  </div>
+</header>
+
+<main><div id="list"></div></main>
+
+<footer>
+  <input id="me" class="me" placeholder="내 이름 (회장단)" autocomplete="off">
+  <button class="btn primary" id="syncBtn">합치기</button>
+  <button class="btn" id="moreBtn">···</button>
+</footer>
+
+<dialog id="syncDlg"><div class="sheet">
+  <h2>회장단끼리 합치기</h2>
+  <p>각자 폰에서 체크한 뒤 <b>내 체크 보내기</b>로 나온 링크를 단톡방에 올리세요. 그 링크를 누르면 서로 체크가 합쳐집니다. 겹치면 <b>나중에 누른 쪽</b>이 이깁니다.</p>
+  <div class="g">
+    <button class="btn primary grow" id="mkLink">내 체크 보내기</button>
+    <button class="btn" id="copyLink">링크 복사</button>
+  </div>
+  <textarea id="linkOut" readonly placeholder="여기에 링크가 나옵니다"></textarea>
+  <hr>
+  <h2>링크 붙여넣기</h2>
+  <p>링크가 안 눌릴 때만 쓰세요.</p>
+  <textarea id="linkIn" placeholder="받은 링크 붙여넣기"></textarea>
+  <div class="g">
+    <button class="btn primary grow" id="applyLink">반영하기</button>
+    <button class="btn" data-close>닫기</button>
+  </div>
+</div></dialog>
+
+<dialog id="moreDlg"><div class="sheet">
+  <h2>더보기</h2>
+  <div class="g">
+    <button class="btn grow" id="copyGc">개총 명단 복사</button>
+    <button class="btn grow" id="copyHs">회식 명단 복사</button>
+  </div>
+  <div class="g">
+    <button class="btn grow" id="copyAll">전체 현황 복사</button>
+    <button class="btn grow" id="csvBtn">CSV 저장</button>
+  </div>
+  <hr>
+  <p>체크를 전부 지웁니다. 되돌릴 수 없어요.</p>
+  <div class="g">
+    <button class="btn grow" id="resetBtn">전체 초기화</button>
+    <button class="btn" data-close>닫기</button>
+  </div>
+  <hr>
+  <p style="margin:0">체크는 이 폰 안에 저장됩니다. 비행기모드·지하에서도 그대로 동작해요.</p>
+</div></dialog>
+
+<div id="toast"></div>
+
+<script>
+const ROSTER=[
+[1,"김가언","백","줄다리기"],[2,"김동욱","백","축구·미션"],[3,"김서림","백",""],
+[4,"김수현","백","피구·줄다리기"],[5,"김이현","청","피구·줄다리기"],[6,"김지우","청","피구·미션"],
+[7,"김진식","청","축구·피구·줄다리기·미션"],[8,"김창희","청","미션"],[9,"문지현","백",""],
+[10,"박소연(26)","청",""],[11,"박소연(24)","청","줄다리기"],[12,"박현민","백","피구"],
+[13,"소예훈","백","축구·줄다리기·미션"],[14,"안현우","청","축구·피구·줄다리기·미션"],
+[15,"양영민","백","축구·피구·줄다리기·미션·계주"],[16,"우민지","백","줄다리기"],[17,"유현선","청",""],
+[18,"윤승현","청",""],[19,"이동영","청","축구"],[20,"이서빈","백","피구·미션"],
+[21,"이정우","청","축구·계주"],[22,"이지환","청",""],[23,"장호진","백","축구·피구"],
+[24,"전하영","청","줄다리기"],[25,"정자운","백","줄다리기"],[26,"정혜인","백",""],
+[27,"조한서","백","축구"],[28,"조희선","백",""],[29,"최준","백","축구"],
+[30,"하은영","청","피구"],[31,"하지훈","청","축구"],[32,"하현서","청",""]
+];
+const KEY="jjb26.v1", MEKEY="jjb26.me", TOTAL=ROSTER.length;
+let marks={}, me="", filter="all", query="";
+
+function load(){
+  try{ marks=JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ marks={}; }
+  try{ me=localStorage.getItem(MEKEY)||""; }catch(e){ me=""; }
+}
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(marks)); }catch(e){ toast("저장 실패 — 시크릿 모드인지 확인"); } }
+
+function cell(id,k){ return (marks[id]||{})[k]||null; }
+function isOn(id,k){ const c=cell(id,k); return !!(c&&c.v); }
+function toggle(id,k){
+  const nv=!isOn(id,k);
+  marks[id]=marks[id]||{};
+  marks[id][k]={v:nv,t:Date.now(),by:me||""};
+  save();
+}
+
+function counts(k){
+  let n=0,b=0,w=0;
+  for(const p of ROSTER) if(isOn(p[0],k)){ n++; p[2]==="청"?b++:w++; }
+  return {n:n,b:b,w:w};
+}
+function paintStats(){
+  for(const k of ["gc","hs"]){
+    const c=counts(k);
+    document.getElementById(k+"Num").innerHTML=c.n+'<i>/'+TOTAL+'</i>';
+    document.getElementById(k+"Sub").textContent="청 "+c.b+" · 백 "+c.w;
+    document.getElementById(k+"Bar").style.width=(c.n/TOTAL*100)+"%";
+  }
+}
+function visible(p){
+  if(query && p[1].replace(/\s/g,"").indexOf(query)<0) return false;
+  if(filter==="blue") return p[2]==="청";
+  if(filter==="white") return p[2]==="백";
+  if(filter==="gc0") return !isOn(p[0],"gc");
+  if(filter==="hs0") return !isOn(p[0],"hs");
+  return true;
+}
+function render(){
+  const list=document.getElementById("list");
+  const rows=ROSTER.filter(visible);
+  if(!rows.length){ list.innerHTML='<div class="empty">해당하는 사람이 없어요</div>'; paintStats(); return; }
+  list.innerHTML=rows.map(function(p){
+    const no=p[0], name=p[1], team=p[2], ev=p[3];
+    const g=isOn(no,"gc"), h=isOn(no,"hs");
+    return '<div class="row" data-id="'+no+'">'+
+      '<div class="no">'+no+'</div>'+
+      '<div class="who"><div class="nm"><strong>'+name+'</strong>'+
+      '<span class="team '+(team==="청"?"blue":"white")+'">'+team+'</span></div>'+
+      (ev?'<div class="ev">'+ev+'</div>':'')+'</div>'+
+      '<div class="btns">'+
+        '<button class="tg" data-k="gc" aria-pressed="'+g+'"><em>'+(g?"✓":"–")+'</em>개총</button>'+
+        '<button class="tg" data-k="hs" aria-pressed="'+h+'"><em>'+(h?"✓":"–")+'</em>회식</button>'+
+      '</div></div>';
+  }).join("");
+  paintStats();
+}
+function patchRow(id){
+  const row=document.querySelector('.row[data-id="'+id+'"]');
+  if(row) row.querySelectorAll(".tg").forEach(function(b){
+    const on=isOn(id,b.dataset.k);
+    b.setAttribute("aria-pressed",on);
+    b.querySelector("em").textContent=on?"✓":"–";
+  });
+  paintStats();
+  if(filter==="gc0"||filter==="hs0") setTimeout(render,200);
+}
+
+document.getElementById("list").addEventListener("click",function(e){
+  const b=e.target.closest(".tg"); if(!b) return;
+  const id=+b.closest(".row").dataset.id;
+  toggle(id,b.dataset.k);
+  patchRow(id);
+  if(navigator.vibrate) navigator.vibrate(12);
+});
+document.getElementById("q").addEventListener("input",function(e){ query=e.target.value.replace(/\s/g,""); render(); });
+document.getElementById("chips").addEventListener("click",function(e){
+  const c=e.target.closest(".chip"); if(!c) return;
+  filter=c.dataset.f;
+  document.querySelectorAll(".chip").forEach(function(x){ x.setAttribute("aria-pressed",x===c); });
+  render();
+});
+const meEl=document.getElementById("me");
+meEl.addEventListener("input",function(e){ me=e.target.value.trim(); try{ localStorage.setItem(MEKEY,me); }catch(_){} });
+
+function b64e(s){
+  const b=new TextEncoder().encode(s); let r="";
+  for(let i=0;i<b.length;i++) r+=String.fromCharCode(b[i]);
+  return btoa(r).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+}
+function b64d(s){
+  s=s.replace(/-/g,"+").replace(/_/g,"/"); while(s.length%4) s+="=";
+  const bin=atob(s), arr=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+  return new TextDecoder().decode(arr);
+}
+function encodeState(){
+  const who=[], rows=[], base=Math.floor(Date.now()/1000);
+  for(const p of ROSTER){
+    const m=marks[p[0]]; if(!m) continue;
+    const row=[p[0]]; let any=false;
+    for(const k of ["gc","hs"]){
+      const c=m[k];
+      if(!c){ row.push(0,0,0); continue; }
+      any=true;
+      let i=who.indexOf(c.by||""); if(i<0){ who.push(c.by||""); i=who.length-1; }
+      row.push(c.v?1:2, Math.floor(c.t/1000)-base, i);
+    }
+    if(any) rows.push(row);
+  }
+  return b64e(JSON.stringify({v:1,b:base,w:who,m:rows,s:me||""}));
+}
+function decodeState(code){
+  const d=JSON.parse(b64d(code));
+  if(!d||d.v!==1||!Array.isArray(d.m)) throw new Error("bad");
+  const out={};
+  for(const row of d.m){
+    const o={};
+    ["gc","hs"].forEach(function(k,i){
+      const st=row[1+i*3];
+      if(!st) return;
+      o[k]={v:st===1,t:(d.b+row[2+i*3])*1000,by:(d.w&&d.w[row[3+i*3]])||""};
+    });
+    if(Object.keys(o).length) out[row[0]]=o;
+  }
+  return {marks:out,sender:d.s||""};
+}
+function mergeIn(remote){
+  let n=0;
+  for(const id of Object.keys(remote)){
+    for(const k of ["gc","hs"]){
+      const r=remote[id][k]; if(!r) continue;
+      const l=cell(id,k);
+      if(!l || r.t>l.t){
+        if(!l || !!l.v!==!!r.v) n++;
+        marks[id]=marks[id]||{}; marks[id][k]=r;
+      }
+    }
+  }
+  save(); render();
+  return n;
+}
+function extractCode(text){
+  const t=(text||"").trim();
+  const m=t.match(/[#&]m=([A-Za-z0-9\-_]+)/);
+  if(m) return m[1];
+  return /^[A-Za-z0-9\-_]{20,}$/.test(t)?t:null;
+}
+function shareURL(){ return location.origin+location.pathname+"#m="+encodeState(); }
+
+const syncDlg=document.getElementById("syncDlg"), moreDlg=document.getElementById("moreDlg");
+document.getElementById("syncBtn").onclick=function(){ document.getElementById("linkOut").value=""; syncDlg.showModal(); };
+document.getElementById("moreBtn").onclick=function(){ moreDlg.showModal(); };
+document.querySelectorAll("[data-close]").forEach(function(b){ b.onclick=function(){ b.closest("dialog").close(); }; });
+document.getElementById("mkLink").onclick=async function(){
+  const url=shareURL();
+  document.getElementById("linkOut").value=url;
+  const txt=(me?me+" ":"")+"체크 현황이에요. 눌러서 합치기 👉 "+url;
+  if(navigator.share){ try{ await navigator.share({text:txt}); return; }catch(_){} }
+  copy(url,"링크 복사됨 — 단톡방에 붙여넣기");
+};
+document.getElementById("copyLink").onclick=function(){
+  const v=document.getElementById("linkOut").value||shareURL();
+  document.getElementById("linkOut").value=v; copy(v,"링크 복사됨");
+};
+document.getElementById("applyLink").onclick=function(){
+  const code=extractCode(document.getElementById("linkIn").value);
+  if(!code){ toast("링크를 못 알아봤어요"); return; }
+  try{
+    const r=decodeState(code), n=mergeIn(r.marks);
+    syncDlg.close();
+    toast((r.sender?r.sender+"님 ":"")+"체크 반영 완료 ("+n+"건 변경)");
+  }catch(e){ toast("링크가 깨졌어요"); }
+};
+
+function copy(text,msg){
+  function done(){ toast(msg||"복사됨"); }
+  function fallback(){
+    const ta=document.createElement("textarea");
+    ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); done(); }catch(e){ toast("복사 실패"); }
+    ta.remove();
+  }
+  if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(text).then(done,fallback);
+  else fallback();
+}
+function listText(k,label){
+  const yes=ROSTER.filter(function(p){ return isOn(p[0],k); });
+  const no=ROSTER.filter(function(p){ return !isOn(p[0],k); });
+  return "["+label+" "+yes.length+"/"+TOTAL+"]\n"+
+    "참석("+yes.length+"): "+(yes.map(function(p){return p[1];}).join(", ")||"-")+"\n"+
+    "미참("+no.length+"): "+(no.map(function(p){return p[1];}).join(", ")||"-");
+}
+document.getElementById("copyGc").onclick=function(){ copy(listText("gc","개총"),"개총 명단 복사됨"); };
+document.getElementById("copyHs").onclick=function(){ copy(listText("hs","회식"),"회식 명단 복사됨"); };
+document.getElementById("copyAll").onclick=function(){ copy(listText("gc","개총")+"\n\n"+listText("hs","회식"),"전체 현황 복사됨"); };
+document.getElementById("csvBtn").onclick=function(){
+  const rows=[["No","성명","팀","개총","회식","개총체크자","회식체크자"]];
+  for(const p of ROSTER){
+    const g=cell(p[0],"gc"), h=cell(p[0],"hs");
+    rows.push([p[0],p[1],p[2],isOn(p[0],"gc")?"O":"",isOn(p[0],"hs")?"O":"",(g&&g.v&&g.by)||"",(h&&h.v&&h.by)||""]);
+  }
+  const csv="﻿"+rows.map(function(r){ return r.map(function(c){ return '"'+String(c).replace(/"/g,'""')+'"'; }).join(","); }).join("\n");
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+  a.download="전기공학과_개총회식_체크.csv"; a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); },2000);
+  toast("CSV 저장됨");
+};
+document.getElementById("resetBtn").onclick=function(){
+  if(!confirm("체크를 전부 지웁니다. 진행할까요?")) return;
+  marks={}; save(); render(); moreDlg.close(); toast("초기화 완료");
+};
+
+let toastT;
+function toast(msg){
+  const el=document.getElementById("toast");
+  el.textContent=msg; el.classList.add("on");
+  clearTimeout(toastT); toastT=setTimeout(function(){ el.classList.remove("on"); },2200);
+}
+
+load();
+meEl.value=me;
+document.getElementById("hint").textContent="총 "+TOTAL+"명";
+render();
+(function(){
+  const m=location.hash.match(/#m=([A-Za-z0-9\-_]+)/);
+  if(!m) return;
+  history.replaceState(null,"",location.pathname);
+  try{
+    const r=decodeState(m[1]), n=mergeIn(r.marks);
+    toast((r.sender?r.sender+"님 ":"")+"체크 합침 ("+n+"건 변경)");
+  }catch(e){ toast("합치기 링크가 깨졌어요"); }
+})();
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(function(){});
+window.addEventListener("beforeunload",save);
+</script>
+</body>
+</html>
